@@ -1,0 +1,21 @@
+packages:
+  "framer-motion": "Smooth page transitions and multi-step form animations"
+  "@stripe/stripe-js": "Stripe core library for payments"
+  "@stripe/react-stripe-js": "Stripe React components for payment forms"
+  "react-hook-form": "Form state management"
+  "@hookform/resolvers": "Zod validation resolver for forms"
+  "zod": "Schema validation"
+  "date-fns": "Date formatting for tour dates"
+  "lucide-react": "Icons"
+
+images:
+  - path: "artifacts/moldova-moto-tours/public/images/logo.png"
+    description: "Rugged minimal vector logo of a motorcycle tire track intertwining with a mountain peak, amber and white colors on a transparent background, suitable for a dark theme adventure brand"
+    aspect_ratio: "1:1"
+  - path: "artifacts/moldova-moto-tours/public/images/hero-texture.png"
+    description: "Dark, gritty, topographical map texture overlay with subtle amber light leaks, perfect for a rugged outdoor adventure website background"
+    aspect_ratio: "16:9"
+
+notes:
+  - Expecting standard JWT token in localStorage under 'admin_token'
+  - Need VITE_STRIPE_PUBLISHABLE_KEY for Stripe integration

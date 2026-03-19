@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Moldova Moto Tours"
+version = "1.0.0"
+id = "artifacts/moldova-moto-tours"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+localPort = 21450
+name = "web"
+paths = ["/"]
+
+[services.development]
+run = "pnpm --filter @workspace/moldova-moto-tours run dev"
+
+[services.env]
+PORT = "21450"
+BASE_PATH = "/"
+
+[services.production]
+build = ["pnpm", "--filter", "@workspace/moldova-moto-tours", "run", "build"]
+publicDir = "artifacts/moldova-moto-tours/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"

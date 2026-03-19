@@ -1,0 +1,340 @@
+Build a full-stack motorcycle tour booking platform for a company that offers guided motorcycle tours in Moldova for international tourists.
+
+The platform must include:
+
+public marketing website
+
+tour booking system
+
+availability calendar
+
+payment integration
+
+admin dashboard
+
+responsive mobile design
+
+Use React frontend + Node.js backend + database.
+
+Project Name
+
+Moldova Moto Tours
+
+Tagline:
+"Discover Moldova on Two Wheels"
+
+Target Users
+
+Adventure motorcycle travelers from Europe and the US looking for unique guided motorcycle tours in Eastern Europe.
+
+Age: 30–60
+Experienced riders
+Small group tours (max 5 riders)
+
+Core Features
+1. Marketing Website
+
+Pages:
+
+Home
+
+Hero section with large background image of motorcycles riding through vineyards.
+
+Headline:
+Ride the Hidden Roads of Moldova
+
+Subheadline:
+Guided motorcycle tours through vineyards, monasteries, and scenic countryside.
+
+CTA buttons:
+
+Book a Tour
+
+View Tours
+
+Sections:
+
+Why Ride in Moldova
+
+Featured Tours
+
+Motorcycles
+
+Testimonials
+
+Gallery
+
+FAQ
+
+Contact
+
+Tours Page
+
+Display tours as cards with images.
+
+Tours offered:
+
+1 Day Wine Ride
+Price: €220
+Duration: 1 day
+Max riders: 5
+
+3 Day Moldova Adventure
+Price: €650
+Duration: 3 days
+
+5 Day Grand Moldova Tour
+Price: €1050
+Duration: 5 days
+
+Each tour card must include:
+
+image
+
+description
+
+duration
+
+price
+
+available dates
+
+Book Now button
+
+Motorcycles Page
+
+Explain available bikes.
+
+Example fleet:
+
+Adventure touring motorcycles similar to **CFMOTO 800MT class bikes.
+
+Show specs:
+
+ABS
+
+traction control
+
+touring windshield
+
+luggage
+
+heated grips
+
+Gallery Page
+
+Photo grid showing:
+
+countryside roads
+
+motorcycles riding
+
+vineyards
+
+monasteries
+
+villages
+
+Contact Page
+
+Include:
+
+contact form
+
+WhatsApp button
+
+Instagram link
+
+Booking System
+
+Create a multi-step booking system.
+
+Step 1
+
+Select tour
+
+Step 2
+
+Select available date from calendar
+
+Step 3
+
+Choose motorcycle
+
+Step 4
+
+Enter rider information:
+
+Fields:
+
+full name
+
+email
+
+phone
+
+country
+
+riding experience
+
+motorcycle license confirmation
+
+Step 5
+
+Payment or reservation deposit
+
+Integrate payments using Stripe.
+
+Allow:
+
+deposit payment (20%)
+
+full payment
+
+After booking:
+
+send confirmation email
+
+store booking in database
+
+Admin Dashboard
+
+Create a secure admin dashboard.
+
+Admin must be able to:
+
+Manage Tours
+
+add/edit tours
+
+change prices
+
+add descriptions
+
+Manage Dates
+
+add available tour dates
+
+set rider limits (max 5)
+
+Manage Motorcycles
+
+add/remove bikes
+
+mark bikes unavailable
+
+Manage Bookings
+
+View bookings list with:
+
+customer name
+
+tour
+
+date
+
+payment status
+
+Allow admin to:
+
+approve bookings
+
+cancel bookings
+
+export bookings
+
+Database Structure
+
+Tables:
+
+Users
+Tours
+TourDates
+Motorcycles
+Bookings
+Payments
+
+Additional Features
+Email Notifications
+
+Automatically send booking confirmation emails.
+
+SEO Optimization
+
+Include:
+
+SEO meta tags
+
+fast page load
+
+optimized images
+
+Multi-language support
+
+Structure website to support:
+
+English
+
+Romanian
+
+German
+
+Design Style
+
+Modern motorcycle adventure travel aesthetic similar to premium tour brands.
+
+Colors:
+
+dark green
+
+black
+
+sand
+
+white
+
+Fonts:
+
+Bold adventure style headline
+Clean modern body font
+
+Technical Stack
+
+Frontend:
+React
+
+Backend:
+Node.js + Express
+
+Database:
+PostgreSQL
+
+Authentication:
+Admin login system
+
+Payments:
+Stripe integration
+
+Performance
+
+The site must be:
+
+mobile optimized
+
+fast loading
+
+SEO friendly
+
+secure
+
+Goal
+
+The website must:
+
+attract international motorcycle tourists
+
+make booking tours easy
+
+allow the company to manage tours and bookings
+
+scale to hundreds of bookings per year

@@ -1,0 +1,861 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: Moldova Moto Tours API
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: tours
+    description: Tour management
+  - name: tour-dates
+    description: Tour date management
+  - name: motorcycles
+    description: Motorcycle management
+  - name: bookings
+    description: Booking management
+  - name: payments
+    description: Payment operations
+  - name: admin
+    description: Admin operations
+  - name: contact
+    description: Contact form
+
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /tours:
+    get:
+      operationId: listTours
+      tags: [tours]
+      summary: List all tours
+      responses:
+        "200":
+          description: List of tours
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Tour"
+    post:
+      operationId: createTour
+      tags: [tours]
+      summary: Create a tour (admin)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTourBody"
+      responses:
+        "201":
+          description: Tour created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tour"
+
+  /tours/{id}:
+    get:
+      operationId: getTour
+      tags: [tours]
+      summary: Get a tour by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Tour details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tour"
+        "404":
+          description: Tour not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      operationId: updateTour
+      tags: [tours]
+      summary: Update a tour (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTourBody"
+      responses:
+        "200":
+          description: Tour updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tour"
+    delete:
+      operationId: deleteTour
+      tags: [tours]
+      summary: Delete a tour (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Tour deleted
+
+  /tour-dates:
+    get:
+      operationId: listTourDates
+      tags: [tour-dates]
+      summary: List tour dates
+      parameters:
+        - name: tourId
+          in: query
+          required: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: List of tour dates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TourDate"
+    post:
+      operationId: createTourDate
+      tags: [tour-dates]
+      summary: Create a tour date (admin)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTourDateBody"
+      responses:
+        "201":
+          description: Tour date created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TourDate"
+
+  /tour-dates/{id}:
+    put:
+      operationId: updateTourDate
+      tags: [tour-dates]
+      summary: Update a tour date (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateTourDateBody"
+      responses:
+        "200":
+          description: Tour date updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TourDate"
+    delete:
+      operationId: deleteTourDate
+      tags: [tour-dates]
+      summary: Delete a tour date (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Tour date deleted
+
+  /motorcycles:
+    get:
+      operationId: listMotorcycles
+      tags: [motorcycles]
+      summary: List all motorcycles
+      responses:
+        "200":
+          description: List of motorcycles
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Motorcycle"
+    post:
+      operationId: createMotorcycle
+      tags: [motorcycles]
+      summary: Create a motorcycle (admin)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMotorcycleBody"
+      responses:
+        "201":
+          description: Motorcycle created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Motorcycle"
+
+  /motorcycles/{id}:
+    put:
+      operationId: updateMotorcycle
+      tags: [motorcycles]
+      summary: Update a motorcycle (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMotorcycleBody"
+      responses:
+        "200":
+          description: Motorcycle updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Motorcycle"
+    delete:
+      operationId: deleteMotorcycle
+      tags: [motorcycles]
+      summary: Delete a motorcycle (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Motorcycle deleted
+
+  /bookings:
+    get:
+      operationId: listBookings
+      tags: [bookings]
+      summary: List all bookings (admin)
+      responses:
+        "200":
+          description: List of bookings
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Booking"
+    post:
+      operationId: createBooking
+      tags: [bookings]
+      summary: Create a booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateBookingBody"
+      responses:
+        "201":
+          description: Booking created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+
+  /bookings/{id}:
+    get:
+      operationId: getBooking
+      tags: [bookings]
+      summary: Get a booking by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Booking details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+        "404":
+          description: Booking not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    patch:
+      operationId: updateBookingStatus
+      tags: [bookings]
+      summary: Update booking status (admin)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateBookingStatusBody"
+      responses:
+        "200":
+          description: Booking updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+
+  /payments/create-intent:
+    post:
+      operationId: createPaymentIntent
+      tags: [payments]
+      summary: Create a Stripe payment intent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePaymentIntentBody"
+      responses:
+        "200":
+          description: Payment intent created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaymentIntentResponse"
+
+  /payments/confirm:
+    post:
+      operationId: confirmPayment
+      tags: [payments]
+      summary: Confirm payment and finalize booking
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConfirmPaymentBody"
+      responses:
+        "200":
+          description: Payment confirmed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+
+  /admin/login:
+    post:
+      operationId: adminLogin
+      tags: [admin]
+      summary: Admin login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginBody"
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminLoginResponse"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /admin/bookings/export:
+    get:
+      operationId: exportBookings
+      tags: [admin]
+      summary: Export bookings as CSV
+      responses:
+        "200":
+          description: CSV export
+          content:
+            text/csv:
+              schema:
+                type: string
+
+  /contact:
+    post:
+      operationId: submitContact
+      tags: [contact]
+      summary: Submit contact form
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ContactFormBody"
+      responses:
+        "200":
+          description: Contact form submitted
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuccessResponse"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        message:
+          type: string
+      required:
+        - success
+
+    Tour:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        shortDescription:
+          type: string
+        durationDays:
+          type: integer
+        priceEur:
+          type: number
+        maxRiders:
+          type: integer
+        imageUrl:
+          type: ["string", "null"]
+        highlights:
+          type: ["string", "null"]
+        included:
+          type: ["string", "null"]
+        isActive:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - slug
+        - description
+        - shortDescription
+        - durationDays
+        - priceEur
+        - maxRiders
+        - isActive
+        - createdAt
+
+    CreateTourBody:
+      type: object
+      properties:
+        name:
+          type: string
+        slug:
+          type: string
+        description:
+          type: string
+        shortDescription:
+          type: string
+        durationDays:
+          type: integer
+        priceEur:
+          type: number
+        maxRiders:
+          type: integer
+        imageUrl:
+          type: ["string", "null"]
+        highlights:
+          type: ["string", "null"]
+        included:
+          type: ["string", "null"]
+        isActive:
+          type: boolean
+      required:
+        - name
+        - slug
+        - description
+        - shortDescription
+        - durationDays
+        - priceEur
+        - maxRiders
+
+    TourDate:
+      type: object
+      properties:
+        id:
+          type: integer
+        tourId:
+          type: integer
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        availableSpots:
+          type: integer
+        maxRiders:
+          type: integer
+        isActive:
+          type: boolean
+        tour:
+          $ref: "#/components/schemas/Tour"
+      required:
+        - id
+        - tourId
+        - startDate
+        - endDate
+        - availableSpots
+        - maxRiders
+        - isActive
+
+    CreateTourDateBody:
+      type: object
+      properties:
+        tourId:
+          type: integer
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        availableSpots:
+          type: integer
+        maxRiders:
+          type: integer
+        isActive:
+          type: boolean
+      required:
+        - tourId
+        - startDate
+        - endDate
+        - availableSpots
+        - maxRiders
+
+    Motorcycle:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        brand:
+          type: string
+        model:
+          type: string
+        year:
+          type: integer
+        engineCC:
+          type: integer
+        description:
+          type: string
+        specs:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        isAvailable:
+          type: boolean
+      required:
+        - id
+        - name
+        - brand
+        - model
+        - year
+        - engineCC
+        - description
+        - isAvailable
+
+    CreateMotorcycleBody:
+      type: object
+      properties:
+        name:
+          type: string
+        brand:
+          type: string
+        model:
+          type: string
+        year:
+          type: integer
+        engineCC:
+          type: integer
+        description:
+          type: string
+        specs:
+          type: ["string", "null"]
+        imageUrl:
+          type: ["string", "null"]
+        isAvailable:
+          type: boolean
+      required:
+        - name
+        - brand
+        - model
+        - year
+        - engineCC
+        - description
+
+    Booking:
+      type: object
+      properties:
+        id:
+          type: integer
+        tourId:
+          type: integer
+        tourDateId:
+          type: integer
+        motorcycleId:
+          type: ["integer", "null"]
+        fullName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        country:
+          type: string
+        ridingExperience:
+          type: string
+        hasLicense:
+          type: boolean
+        paymentType:
+          type: string
+          enum: [deposit, full]
+        paymentStatus:
+          type: string
+          enum: [pending, paid, refunded, cancelled]
+        bookingStatus:
+          type: string
+          enum: [pending, approved, cancelled]
+        totalAmount:
+          type: number
+        depositAmount:
+          type: number
+        stripePaymentIntentId:
+          type: ["string", "null"]
+        notes:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+          format: date-time
+        tour:
+          $ref: "#/components/schemas/Tour"
+        tourDate:
+          $ref: "#/components/schemas/TourDate"
+      required:
+        - id
+        - tourId
+        - tourDateId
+        - fullName
+        - email
+        - phone
+        - country
+        - ridingExperience
+        - hasLicense
+        - paymentType
+        - paymentStatus
+        - bookingStatus
+        - totalAmount
+        - depositAmount
+        - createdAt
+
+    CreateBookingBody:
+      type: object
+      properties:
+        tourId:
+          type: integer
+        tourDateId:
+          type: integer
+        motorcycleId:
+          type: ["integer", "null"]
+        fullName:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        country:
+          type: string
+        ridingExperience:
+          type: string
+        hasLicense:
+          type: boolean
+        paymentType:
+          type: string
+          enum: [deposit, full]
+        notes:
+          type: ["string", "null"]
+      required:
+        - tourId
+        - tourDateId
+        - fullName
+        - email
+        - phone
+        - country
+        - ridingExperience
+        - hasLicense
+        - paymentType
+
+    UpdateBookingStatusBody:
+      type: object
+      properties:
+        bookingStatus:
+          type: string
+          enum: [pending, approved, cancelled]
+        paymentStatus:
+          type: string
+          enum: [pending, paid, refunded, cancelled]
+      required: []
+
+    CreatePaymentIntentBody:
+      type: object
+      properties:
+        bookingId:
+          type: integer
+        paymentType:
+          type: string
+          enum: [deposit, full]
+      required:
+        - bookingId
+        - paymentType
+
+    PaymentIntentResponse:
+      type: object
+      properties:
+        clientSecret:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+      required:
+        - clientSecret
+        - amount
+        - currency
+
+    ConfirmPaymentBody:
+      type: object
+      properties:
+        bookingId:
+          type: integer
+        paymentIntentId:
+          type: string
+      required:
+        - bookingId
+        - paymentIntentId
+
+    AdminLoginBody:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - username
+        - password
+
+    AdminLoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+        username:
+          type: string
+      required:
+        - token
+        - username
+
+    ContactFormBody:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        subject:
+          type: string
+        message:
+          type: string
+      required:
+        - name
+        - email
+        - subject
+        - message

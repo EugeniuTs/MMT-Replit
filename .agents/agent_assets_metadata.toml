@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "ymCsktdloylkYeKWRhDkJ"
+uri = "file://moldova-moto-tours.tar.gz"
+type = "unspecified"
+title = "Moldova Moto Tours — Full Project Archive"
